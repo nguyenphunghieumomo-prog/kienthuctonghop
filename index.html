@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiến Thức Tổng Hợp</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F5F0;
+    --bg-card: #FFFFFF;
+    --bg-surface: #EFEDE7;
+    --text-primary: #1A1A18;
+    --text-secondary: #6B6860;
+    --text-muted: #9E9C96;
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.15);
+
+    --finance: #185FA5;
+    --finance-light: #E6F1FB;
+    --finance-mid: #B5D4F4;
+
+    --eco: #854F0B;
+    --eco-light: #FAEEDA;
+    --eco-mid: #FAC775;
+
+    --stock: #7F77DD;
+    --stock-light: #EEEDFE;
+    --stock-mid: #AFA9EC;
+
+    --english: #1D9E75;
+    --english-light: #E1F5EE;
+    --english-mid: #9FE1CB;
+  }
+
+  body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--text-primary);
+    padding: 2rem 2.5rem;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 3px solid var(--english);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+  .logo span { color: #9FE1CB; }
+
+  .header-right {
+    display: flex; align-items: center; gap: 1rem;
+  }
+
+  .update-badge {
+    font-size: 11px;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.08);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  /* ── NAV TABS ── */
+  nav {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    display: flex; gap: 0; overflow-x: auto;
+  }
+
+  .tab-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 1rem 1.5rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--text-muted);
+    background: none; border: none;
+    border-bottom: 2.5px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text-primary); }
+  .tab-btn.active { color: var(--text-primary); }
+  .tab-btn[data-tab="finance"].active { border-color: var(--finance); color: var(--finance); }
+  .tab-btn[data-tab="eco"].active     { border-color: var(--eco);     color: var(--eco);     }
+  .tab-btn[data-tab="stock"].active   { border-color: var(--stock);   color: var(--stock);   }
+  .tab-btn[data-tab="english"].active { border-color: var(--english); color: var(--english); }
+
+  .tab-icon {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+  .tab-btn[data-tab="finance"] .tab-icon  { background: var(--finance-light);  color: var(--finance);  }
+  .tab-btn[data-tab="eco"]     .tab-icon  { background: var(--eco-light);       color: var(--eco);      }
+  .tab-btn[data-tab="stock"]   .tab-icon  { background: var(--stock-light);     color: var(--stock);    }
+  .tab-btn[data-tab="english"] .tab-icon  { background: var(--english-light);   color: var(--english);  }
+
+  .tab-count {
+    font-size: 10px;
+    background: var(--bg-surface);
+    padding: 1px 6px;
+    border-radius: 10px;
+    color: var(--text-muted);
+  }
+  .tab-btn.active .tab-count { background: currentColor; color: #fff; }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 2.5rem;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--text-primary);
+  }
+  .section-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+  .doc-count-pill {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  /* ── DOCUMENT CARDS ── */
+  .doc-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .doc-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 1.2rem;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+    cursor: default;
+  }
+  .doc-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+
+  .doc-day-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 18px;
+    flex-shrink: 0;
+    align-self: center;
+  }
+  .doc-day-label {
+    font-size: 9px;
+    font-weight: 400;
+    opacity: 0.7;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .doc-body { min-width: 0; }
+  .doc-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .doc-date { font-size: 11px; color: var(--text-muted); }
+  .doc-tag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 5px;
+  }
+  .doc-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+    line-height: 1.4;
+  }
+  .doc-content {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Finance colors */
+  #finance .doc-day-badge  { background: var(--finance-light); color: var(--finance); }
+  #finance .doc-tag        { background: var(--finance-light); color: var(--finance); }
+  #finance .doc-count-pill { background: var(--finance-light); color: var(--finance); }
+
+  /* Eco colors */
+  #eco .doc-day-badge  { background: var(--eco-light); color: var(--eco); }
+  #eco .doc-tag        { background: var(--eco-light); color: var(--eco); }
+  #eco .doc-count-pill { background: var(--eco-light); color: var(--eco); }
+
+  /* Stock colors */
+  #stock .doc-day-badge  { background: var(--stock-light); color: var(--stock); }
+  #stock .doc-tag        { background: var(--stock-light); color: var(--stock); }
+  #stock .doc-count-pill { background: var(--stock-light); color: var(--stock); }
+
+  /* English colors */
+  #english .doc-day-badge  { background: var(--english-light); color: var(--english); }
+  #english .doc-tag        { background: var(--english-light); color: var(--english); }
+  #english .doc-count-pill { background: var(--english-light); color: var(--english); }
+
+  /* ── PANELS ── */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── EMPTY STATE ── */
+  .empty {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .empty-icon { font-size: 32px; margin-bottom: 1rem; opacity: 0.4; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    header { padding: 1.2rem 1.2rem; }
+    nav { padding: 0 0.5rem; }
+    main { padding: 0 1rem; margin: 1.2rem auto; }
+    .tab-btn { padding: 0.9rem 0.9rem; font-size: 12px; }
+    .section-title { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Kiến Thức <span>Tổng Hợp</span></div>
+  <div class="header-right">
+    <span class="update-badge" id="last-update">Cập nhật: 18/03/2026</span>
+  </div>
+</header>
+
+<nav>
+  <button class="tab-btn active" data-tab="finance" onclick="switchTab('finance')">
+    <span class="tab-icon">₫</span>
+    Tài chính
+    <span class="tab-count" id="count-finance">3</span>
+  </button>
+  <button class="tab-btn" data-tab="eco" onclick="switchTab('eco')">
+    <span class="tab-icon">📊</span>
+    Kinh tế
+    <span class="tab-count" id="count-eco">2</span>
+  </button>
+  <button class="tab-btn" data-tab="stock" onclick="switchTab('stock')">
+    <span class="tab-icon">📈</span>
+    Chứng khoán
+    <span class="tab-count" id="count-stock">3</span>
+  </button>
+  <button class="tab-btn" data-tab="english" onclick="switchTab('english')">
+    <span class="tab-icon">A</span>
+    Tiếng Anh
+    <span class="tab-count" id="count-english">2</span>
+  </button>
+</nav>
+
+<main>
+
+  <!-- ══ TÀI CHÍNH ══ -->
+  <div class="panel active" id="finance">
+    <div class="section-head">
+      <div>
+        <div class="section-title">Tài chính</div>
+        <div class="section-subtitle">Kiến thức tài chính cá nhân & vĩ mô</div>
+      </div>
+      <span class="doc-count-pill">3 bài học</span>
+    </div>
+    <div class="doc-grid">
+
+      <div class="doc-card">
+        <div class="doc-day-badge">1<div class="doc-day-label">Ngày</div></div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="doc-date">17/03/2026</span>
+            <span class="doc-tag">Tài chính</span>
+          </div>
+          <div class="doc-title">Khái niệm tiền tệ</div>
+          <div class="doc-content">Tiền tệ là phương tiện trao đổi được chấp nhận rộng rãi trong nền kinh tế. Bao gồm tiền mặt, tiền gửi ngân hàng và các công cụ thanh toán hiện đại. Tiền tệ có 3 chức năng: phương tiện trao đổi, đơn vị đo lường giá trị, phương tiện dự trữ giá trị.</div>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-day-badge">2<div class="doc-day-label">Ngày</div></div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="doc-date">16/03/2026</span>
+            <span class="doc-tag">Tài chính</span>
+          </div>
+          <div class="doc-title">Lãi suất và tác động kinh tế</div>
+          <div class="doc-content">Lãi suất là chi phí của việc vay vốn, được biểu thị bằng tỷ lệ phần trăm. Khi lãi suất tăng: đầu tư giảm, tiêu dùng giảm, đồng nội tệ thường tăng giá. Ngân hàng Trung ương dùng lãi suất để kiểm soát lạm phát và tăng trưởng kinh tế.</div>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-day-badge">3<div class="doc-day-label">Ngày</div></div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="doc-date">15/03/2026</span>
+            <span class="doc-tag">Tài chính</span>
+          </div>
+          <div class="doc-title">Chính sách tiền tệ</div>
+          <div class="doc-content">Ngân hàng Trung ương điều hành cung tiền thông qua các công cụ: lãi suất cơ bản, tỷ lệ dự trữ bắt buộc, nghiệp vụ thị trường mở. Chính sách nới lỏng (giảm lãi suất) kích thích tăng trưởng; chính sách thắt chặt kiềm chế lạm phát.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ KINH TẾ ══ -->
+  <div class="panel" id="eco">
+    <div class="section-head">
+      <div>
+        <div class="section-title">Kinh tế</div>
+        <div class="section-subtitle">Kinh tế học vi mô & vĩ mô</div>
+      </div>
+      <span class="doc-count-pill">2 bài học</span>
+    </div>
+    <div class="doc-grid">
+
+      <div class="doc-card">
+        <div class="doc-day-badge">1<div class="doc-day-label">Ngày</div></div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="doc-date">16/03/2026</span>
+            <span class="doc-tag">Kinh tế</span>
+          </div>
+          <div class="doc-title">Cung – Cầu và cân bằng thị trường</div>
+          <div class="doc-content">Quy luật cầu: giá tăng → lượng cầu giảm. Quy luật cung: giá tăng → lượng cung tăng. Điểm cân bằng là nơi cung bằng cầu, xác định giá thị trường. Khi cung hoặc cầu thay đổi, điểm cân bằng mới được hình thành.</div>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-day-badge">2<div class="doc-day-label">Ngày</div></div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="doc-date">15/03/2026</span>
+            <span class="doc-tag">Kinh tế</span>
+          </div>
+          <div class="doc-title">GDP và tăng trưởng kinh tế</div>
+          <div class="doc-content">GDP (Gross Domestic Product) là tổng giá trị thị trường của tất cả hàng hóa và dịch vụ sản xuất trong một quốc gia trong một khoảng thời gian nhất định. GDP tính theo 3 cách: chi tiêu, thu nhập, và sản xuất.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ CHỨNG KHOÁN ══ -->
+  <div class="panel" id="stock">
+    <div class="section-head">
+      <div>
+        <div class="section-title">Chứng khoán</div>
+        <div class="section-subtitle">Đầu tư & thị trường chứng khoán</div>
+      </div>
+      <span class="doc-count-pill">3 bài học</span>
+    </div>
+    <div class="doc-grid">
+
+      <div class="doc-card">
+        <div class="doc-day-badge">5<div class="doc-day-label">Ngày</div></div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="doc-date">18/03/2026</span>
+            <span class="doc-tag">Chứng khoán</span>
+          </div>
+          <div class="doc-title">Quỹ ETF là gì?</div>
+          <div class="doc-content">ETF (Exchange Traded Fund) là quỹ đầu tư được giao dịch trên sàn chứng khoán như cổ phiếu thông thường. ETF theo dõi một chỉ số (như VN30, S&P500) hoặc một nhóm tài sản. Ưu điểm: phí thấp, đa dạng hóa tự động, thanh khoản cao.</div>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-day-badge">4<div class="doc-day-label">Ngày</div></div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="doc-date">17/03/2026</span>
+            <span class="doc-tag">Chứng khoán</span>
+          </div>
+          <div class="doc-title">Phân tích kỹ thuật cơ bản</div>
+          <div class="doc-content">Phân tích kỹ thuật nghiên cứu biểu đồ giá và khối lượng giao dịch để dự đoán xu hướng. Các công cụ cơ bản: đường hỗ trợ/kháng cự, đường trung bình động (MA), chỉ báo RSI, MACD. Nguyên tắc: lịch sử giá có xu hướng lặp lại.</div>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-day-badge">3<div class="doc-day-label">Ngày</div></div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="doc-date">16/03/2026</span>
+            <span class="doc-tag">Chứng khoán</span>
+          </div>
+          <div class="doc-title">Chỉ số VN-Index</div>
+          <div class="doc-content">VN-Index là chỉ số chứng khoán tổng hợp của Sở Giao dịch Chứng khoán TP.HCM (HOSE), phản ánh biến động giá của toàn bộ cổ phiếu niêm yết. Được tính theo phương pháp vốn hóa thị trường, công bố theo thời gian thực.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ TIẾNG ANH ══ -->
+  <div class="panel" id="english">
+    <div class="section-head">
+      <div>
+        <div class="section-title">Học tiếng Anh</div>
+        <div class="section-subtitle">Ngữ pháp, từ vựng & kỹ năng</div>
+      </div>
+      <span class="doc-count-pill">2 bài học</span>
+    </div>
+    <div class="doc-grid">
+
+      <div class="doc-card">
+        <div class="doc-day-badge">1<div class="doc-day-label">Ngày</div></div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="doc-date">17/03/2026</span>
+            <span class="doc-tag">Tiếng Anh</span>
+          </div>
+          <div class="doc-title">Thì hiện tại đơn (Simple Present)</div>
+          <div class="doc-content">Dùng để diễn tả: thói quen (I go to work every day), sự thật hiển nhiên (The sun rises in the east), lịch trình cố định. Cấu trúc: S + V(s/es) với ngôi 3 số ít. Phủ định: S + do/does not + V. Nghi vấn: Do/Does + S + V?</div>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-day-badge">2<div class="doc-day-label">Ngày</div></div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="doc-date">16/03/2026</span>
+            <span class="doc-tag">Tiếng Anh</span>
+          </div>
+          <div class="doc-title">Từ vựng chủ đề tài chính</div>
+          <div class="doc-content">Investment (đầu tư), Revenue (doanh thu), Profit/Loss (lợi nhuận/thua lỗ), Liability (nợ phải trả), Asset (tài sản), Cash flow (dòng tiền), Interest rate (lãi suất), Portfolio (danh mục đầu tư). Luyện dùng trong câu để nhớ lâu hơn.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Kiến Thức Tổng Hợp · Cập nhật thường xuyên · Được tạo bởi Claude AI
+</footer>
+
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelector('[data-tab="' + tab + '"]').classList.add('active');
+    document.getElementById(tab).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
